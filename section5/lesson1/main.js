@@ -24,6 +24,7 @@ app.controller('PersonListController', function ($scope, ContactService) {
 
   $scope.loadMore = function() {
     console.log("Load more!");
+    $scope.contacts.loadMore();
   };
 
   $scope.sensitiveSearch = function (person) {
@@ -42,18 +43,37 @@ app.service('ContactService', function (Contact) {
     'addPerson': function (person) {
       this.persons.push(person);
     },
-    'pageNumber': 1,
+    'page': 1,
     'hasMore': true,
     'isLoading': false,
     'selectedPerson': null,
     'persons': [],
     'loadContacts': function() {
-      Contact.get(function(data) {
-        console.log(data);
-        angular.forEach(data.results, function(person) {
-          self.persons.push(new Contact(person));
+      if (self.hasMore && !self.isLoading) {
+        self.isLoading = true;
+
+        var params = {
+          'page': self.page
+        };
+
+        Contact.get(params, function(data) {
+          console.log(data);
+          angular.forEach(data.results, function(person) {
+            self.persons.push(new Contact(person));
+          });
+
+          if (!data.next) {
+            self.hasMore = false;
+          }
+          self.isLoading = false;
         });
-      });
+      }
+    },
+    'loadMore': function() {
+      if (self.hasMore && !self.isLoading) {
+        self.page += 1;
+        self.loadContacts();
+      }
     }
   };
 
