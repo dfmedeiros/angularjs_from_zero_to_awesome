@@ -3,7 +3,8 @@ var app = angular.module('codecraft', [
   'infinite-scroll',
   'angularSpinner',
   'jcs-autoValidate',
-  'angular-ladda'
+  'angular-ladda',
+  'mgcrea.ngStrap'
 ]);
 
 app.config(function($httpProvider, $resourceProvider, laddaProvider) {
@@ -31,10 +32,10 @@ app.controller('PersonDetailController', function ($scope, ContactService) {
 
   $scope.remove = function() {
     $scope.contacts.removeContact($scope.contacts.selectedPerson);
-  }
+  };
 });
 
-app.controller('PersonListController', function ($scope, ContactService) {
+app.controller('PersonListController', function ($scope, $modal, ContactService) {
 
   $scope.search = "";
   $scope.order = "email";
@@ -42,6 +43,14 @@ app.controller('PersonListController', function ($scope, ContactService) {
 
   $scope.loadMore = function() {
     $scope.contacts.loadMore();
+  };
+
+  $scope.showCreateModal = function() {
+    $scope.createModal = $modal({
+      scope: $scope,
+      template: 'templates/modal.create.tpl.html',
+      show: true
+    });
   };
 
   $scope.$watch('search', function(newVal, oldVal) {
