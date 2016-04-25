@@ -16,6 +16,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/',
       templateUrl: 'templates/list.html',
       controller: 'PersonListController'
+    })
+    .state('edit', {
+      url: '/edit/:email',
+      templateUrl: 'templates/edit.html',
+      controller: 'PersonDetailController'
     });
 
     $urlRouterProvider.otherwise('/');
