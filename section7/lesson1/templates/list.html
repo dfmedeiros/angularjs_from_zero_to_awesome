@@ -6,7 +6,7 @@
       <input type="text"
              class="form-control"
              id="name"
-             ng-model="search"
+             ng-model="contacts.search"
              placeholder="Search name..."
           />
     </div >
@@ -15,7 +15,7 @@
 
     <div class="form-group" >
       <select class="form-control"
-              ng-model="order" >
+              ng-model="contacts.ordering" >
         <option value="name" >Name (ASC)</option >
         <option value="-name" >Name (DEC)</option >
         <option value="email" >Email (ASC)</option >
@@ -77,7 +77,7 @@
 
   <div ng-show="contacts.persons.length == 0 && !contacts.isLoading" >
     <div class="alert alert-info" >
-      <p class="text-center" >No results found for search term '{{ search }}'</p >
+      <p class="text-center" >No results found for search term '{{ contacts.search }}'</p >
     </div >
   </div >
 
