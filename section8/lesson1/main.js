@@ -78,11 +78,21 @@ app.factory("Contact", function ($resource) {
 
 app.directive("ccSpinner", function() {
   return {
-    'restrict': 'E',
+    'restrict': 'AE',
     'templateUrl': 'templates/spinner.html',
     'scope': {
       'isLoading': '=',
       'message': '@'
+    }
+  }
+});
+
+app.directive("ccCard", function() {
+  return {
+    'restrict': 'AE',
+    'templateUrl': 'templates/card.html',
+    'scope': {
+      'user': '='
     }
   }
 });
