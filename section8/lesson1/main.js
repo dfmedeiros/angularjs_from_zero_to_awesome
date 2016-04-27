@@ -81,7 +81,8 @@ app.directive("ccSpinner", function() {
     'restrict': 'E',
     'templateUrl': 'templates/spinner.html',
     'scope': {
-      'isLoading': '='
+      'isLoading': '=',
+      'message': '@'
     }
   }
 });
